@@ -53,25 +53,49 @@ catch let error {
  - Experiment:
  Create a Human class that has a name and age property. Also, create an initializer for this class to set its initial properties.
  */
-
+class Human {
+    var name = ""
+    var age = 0
+    
+    init(with name: String, age: Int) throws {
+        self.name = name
+        self.age = age
+        
+        if name == "" {
+            throw invalidInput.missingNameInput
+        }
+        if age < 0 {
+            throw invalidInput.ageInvalid
+        }
+    }
+}
 
 /*:
  - Experiment:
  Create your own errors that throw when the name provided is empty or if the age is invalid. Go back and update the Human's initializer to throw an error when the data passed in is invalid.
  */
-
+enum invalidInput: Error {
+    case missingNameInput
+    case ageInvalid
+}
 
 /*:
  - Experiment:
  Now you can test your new Human class and surround it around the do-catch blocks.
  */
+do {
+    let John = try Human (with: "John", age: -9)
+}
 
+catch let error {
+    print("Error has been thrown: \(error)")
+}
 
 /*:
  - Experiment:
  Test your Human class again but don't surround it with a do-catch block and use `try?` instead. What do you notice? (What is the value of the new human when an error is thrown?)
  */
-
+let victor = try? Human (with: "Victor", age: -10)
 
 /*:
  - Experiment:

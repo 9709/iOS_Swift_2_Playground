@@ -33,7 +33,10 @@ printMyTwoNumbers(num1: "three", num2: "four")
  - Experiment:
  Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. (Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
  */
-
+func times<Element: Numeric>(num1: Element, num2: Element) {
+    let total = num1*num2
+    print(total)
+}
 
 /*:
  - Experiment:
@@ -49,7 +52,11 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - Experiment:
  Update your multiplication function and test it! Try using different variable types to see what works and what doesn't.
  */
-
+func multi<Element: Numeric>(num1: Element, num2: Element) {
+    let total = num1*num2
+    print(total)
+}
+multi(num1: 5, num2: 6)
 
 /*:
  - Experiment:
@@ -60,8 +67,15 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  For this experiment, refrain from using the array method `indexOf`. Also the protocol `Equatable` might be useful here. Search it up to see what it's about.
  */
 
-
-
+func findNumber<Element: Numeric>(in array: [Element], number: Element) {
+    for numbers in array {
+        if numbers == number {
+            print("\(numbers) is in the list")
+        }
+    }
+}
+var listOfNumbers = [1,2,3,4,5]
+findNumber(in: listOfNumbers, number: 6)
 /*:
  - Callout(Challenge):
  During class you saw a simple implementation of a stack where data is inserted (pushed) to the top of the stack when data is added. When data is removed (pop) from the stack, it removes the first item at the top of the stack. We will now implement a similar data structure called a "queue" as a generic.

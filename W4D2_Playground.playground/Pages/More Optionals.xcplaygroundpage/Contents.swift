@@ -7,31 +7,46 @@
  - Experiment:
  Declare a optional Double value and set it to nil.
  */
-
+var number:Double? = nil
 
 /*:
  - Experiment:
  Assign a value your optional Double.
  */
-
+number = 10
 
 /*:
  - Experiment:
  Force unwrap the optional value. Why do you have to be careful about force unwrapping?
  */
-
+number!
 
 /*:
  - Experiment:
  Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
  */
-
+if let sureNum = number {
+    print("\(sureNum) has been safely unwrapped")
+} else {
+    print("number did not properly unwrap")
+}
 
 /*:
  - Callout(Challenge):
  Create a function that removes the `nil` values from the array and returns a new array with only the valid Strings.
  */
 var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
+
+func removeNil(array: [String?]) -> [String] {
+var newArray: [String] = [String]()
+    
+    for index in array {
+        if let cleanTestData = index {
+            newArray.append(cleanTestData)
+        }
+    }
+ return newArray
+}
 
 
 /*:
@@ -54,7 +69,13 @@ let email: String? = "user1@lighthouselabs.ca"
 //let username: String? = nil
 //let password: String? = nil
 //let email: String? = "user1@lighthouselabs.ca"
-
+func checkInputs (username:String?, password:String?) -> Bool {
+    if username != nil, password != nil  {
+        return true
+    } else {
+        return false
+    }
+}
 
 
 /*:
@@ -85,13 +106,33 @@ isMyNumberANegativeValue(myNumber: myNumber)
  - Experiment:
  Try creating your own guard statement with different conditional statements. Notice which boolean condition causes the code the enter the 'else' block or bypass it entirely.
  */
+let word = "Hello"
 
+func cannotBeBlank (word: String) {
+    guard word != "" else {
+        print ("NOTHING FILLED IN")
+        return
+    }
+    
+    print ("There is a world")
+
+    
+}
+
+cannotBeBlank(word: word)
 
 /*:
  - Experiment:
  Create a function that takes in two number parameters and divide them. We don't like dividing by zero, so ensure this doesn't happen. Otherwise, return the calculated value.
  */
-
+func toDivide (number1: Int, number2: Int) -> Int {
+    let answer = number1 / number2
+    guard answer != 0 else {
+        print("Cannot use 0")
+        return 0
+    }
+    return answer
+}
 
 /*:
  Let's take a look at another example and see how we can use guard for optionals
@@ -123,6 +164,17 @@ isMyNumberAnOptional(myOptionalNumber: myOptionalNumber)
  - Experiment:
  Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Make sure to `guard` against an empty array. Use `array.first` to check if there is at least one value in the array.
  */
+
+func addAllNums (array: [Int]) -> Int {
+        guard array.first != nil else {
+            return 0
+        }
+    let addedTotal = array.reduce(0,+)
+    return addedTotal
+}
+
+addAllNums(array: [1, 7, 6])
+
 
 
 /*:
